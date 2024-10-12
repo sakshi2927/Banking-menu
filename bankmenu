@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+int main() {
+    char ans;
+    int choice = 1;  // Initialize to enter the loop
+    int bankbalance = 0;
+
+    while (choice >= 0) {
+        printf("\n\033[1;34m\t    BANKING MENU\033[0m\n");
+        printf("\033[32m|              1. DEPOSIT               |\033[0m\n");
+        printf("\033[32m|              2. WITHDRAWAL            |\033[0m\n");
+        printf("\033[32m|              3. CHECK BALANCE         |\033[0m\n");
+        printf("\033[32m|              4. EXIT                  |\033[0m\n");
+        
+        printf("\033[33mChoose any option (1, 2, 3, 4): \033[0m");
+        int n, amount;
+
+        scanf("%d", &n);
+
+        switch (n) {
+            case 1: // Deposit
+                printf("\033[33mHow much money do you want to deposit?\033[0m\n");
+                scanf("%d", &amount);
+                if (amount < 0) {
+                    printf("\033[31mInvalid amount. Please enter a positive number.\033[0m\n");
+                } else {
+                    bankbalance += amount;
+                    printf("\033[32mYou have deposited \033[35m%d\033[0m. \033[32mNew balance: \033[35m%d\033[0m\n", amount, bankbalance);
+                }
+                break;
+
+            case 2: // Withdraw
+                printf("\033[33mHow much money do you want to withdraw?\033[0m\n");
+                scanf("%d", &amount);
+                if (amount < 0) {
+                    printf("\033[31mInvalid amount. Please enter a positive number.\033[0m\n");
+                } else if (amount > bankbalance) {
+                    printf("\033[31mInsufficient Balance.\033[0m\n");
+                } else {
+                    bankbalance -= amount;
+                    printf("\033[32mYou have withdrawn %d. Remaining balance: %d\033[0m\n", amount, bankbalance);
+                }
+                break;
+
+            case 3: // Check balance
+                printf("\033[32mYour bank balance is: %d\033[0m\n", bankbalance);
+                break;
+
+            case 4: // Exit
+                printf("\033[32mThank you for using the banking system.\033[0m\n");
+                choice = -1; // Set choice to -1 to exit the loop
+                break;
+
+            default:
+                printf("\033[31mInvalid option. Please try again.\033[0m\n");
+        }
+    }
+
+    return 0;
+}
